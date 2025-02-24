@@ -15,16 +15,18 @@ import org.springframework.security.core.userdetails.UserDetails;
 @Table(name="usuarios")
 public class Usuario implements UserDetails {
 
-    @Id
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nomeCompleto;
     private String email;
     private String senha;
-    private String nomeUsuario;//nickname
+    private String nomeUsuario;
     private String biografia;
     private String miniBiografia;
     
+    //senha cadastrada no banco eh: maria123, utilizamos o site https://bcrypt.online/ para criptografar
+    //o login eh maria@email.com
     
     
     @Override
@@ -60,5 +62,6 @@ public class Usuario implements UserDetails {
 
 	public String getMiniBiografia() {
 		return miniBiografia;
-	}    
+	} 
+	 
 }
