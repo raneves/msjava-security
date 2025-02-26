@@ -10,23 +10,30 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 
 @Configuration
 @EnableWebSecurity
 public class ConfiguracoesSeguranca {
+	private final FiltroTokenAcesso filtroTokenAcesso;
 
-//    private final FiltroTokenAcesso filtroTokenAcesso;
-//
-//    public ConfiguracoesSeguranca(FiltroTokenAcesso filtroTokenAcesso) {
-//        this.filtroTokenAcesso = filtroTokenAcesso;
-//    }
-
+	public ConfiguracoesSeguranca(FiltroTokenAcesso filtroTokenAcesso) {
+		this.filtroTokenAcesso = filtroTokenAcesso;
+	}
+	
 	@Bean
     public SecurityFilterChain filtrosSeguranca(HttpSecurity http) throws Exception {
         return http
+        		.authorizeHttpRequests(
+                        req -> {
+                            req.requestMatchers("/login", "/atualizar-token").permitAll();
+                            req.anyRequest().authenticated();
+                        }
+                    )
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .csrf(csrf -> csrf.disable())
+                .addFilterBefore(filtroTokenAcesso, UsernamePasswordAuthenticationFilter.class) // este filtro tem que executar antes do filtro de autenticacao do spring
                 .build();
     }
 

@@ -8,6 +8,8 @@ public class MsjavaSecurityApplication {
 
 	public static void main(String[] args) {
 		
+		//utilizar o site https://jwt.io/ para verificar o token 
+		
 	    //senha cadastrada no banco eh: maria123, utilizamos o site https://bcrypt.online/ para criptografar
 	    //o login eh maria@email.com
 		
