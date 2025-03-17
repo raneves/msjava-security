@@ -5,8 +5,7 @@ import jakarta.validation.constraints.NotNull;
 
 public record DadosCadastroTopico(
          @NotBlank String titulo,
-         @NotBlank String mensagem,
-         @NotBlank String autor,
+         @NotBlank String mensagem,         
          @NotNull Long cursoId
 ) {
 }

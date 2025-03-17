@@ -7,6 +7,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import br.com.romulo.msjava_security.domain.curso.CursoService;
+import br.com.romulo.msjava_security.domain.usuario.Usuario;
 import br.com.romulo.msjava_security.infra.exeption.RegraDeNegocioException;
 
 @Service
@@ -20,9 +21,9 @@ public class TopicoService {
 	    }
 
 	    @Transactional
-	    public Topico cadastrar(DadosCadastroTopico dados) {
+	    public Topico cadastrar(DadosCadastroTopico dados, Usuario autor) {
 	        var curso = cursoService.buscarPeloId(dados.cursoId());
-	        var topico = new Topico(dados, curso);
+	        var topico = new Topico(dados, curso, autor);
 	        return repository.save(topico);
 	    }
 	    public Page<DadosListagemTopico> listar(String categoria, Long idCurso, Boolean semResposta, Boolean solucionados, Pageable paginacao) {

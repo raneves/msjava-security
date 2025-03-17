@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 
 import br.com.romulo.msjava_security.domain.curso.Categoria;
 import br.com.romulo.msjava_security.domain.curso.Curso;
+import br.com.romulo.msjava_security.domain.usuario.Usuario;
 
 @Entity
 @Table(name = "topicos")
@@ -23,7 +24,9 @@ public class Topico {
 	    private Long id;
 	    private String titulo;
 	    private String mensagem;
-	    private String autor;
+	    @ManyToOne
+	    @JoinColumn(name = "autor_id")
+	    private Usuario autor;
 	    private LocalDateTime dataCriacao;
 	    @Enumerated(EnumType.STRING)
 	    private Status status;
@@ -39,10 +42,10 @@ public class Topico {
 	    @Deprecated
 	    public Topico(){}
 
-	    public Topico(DadosCadastroTopico dados, Curso curso) {
+	    public Topico(DadosCadastroTopico dados, Curso curso, Usuario autor) {
 	        this.titulo = dados.titulo();
 	        this.mensagem = dados.mensagem();
-	        this.autor = dados.autor();
+	        this.autor = autor;
 	        this.dataCriacao = LocalDateTime.now();
 	        this.status = Status.NAO_RESPONDIDO;
 	        this.aberto = true;
@@ -63,9 +66,7 @@ public class Topico {
 	        return mensagem;
 	    }
 
-	    public String getAutor() {
-	        return autor;
-	    }
+	   
 
 	    public LocalDateTime getDataCriacao() {
 	        return dataCriacao;
@@ -83,7 +84,13 @@ public class Topico {
 	        return quantidadeRespostas;
 	    }
 
-	    public Topico atualizarInformacoes(DadosAtualizacaoTopico dados, Curso curso) {
+	    
+	    
+	    public Usuario getAutor() {
+			return autor;
+		}
+
+		public Topico atualizarInformacoes(DadosAtualizacaoTopico dados, Curso curso) {
 	        if(dados.titulo() != null){
 	            this.titulo = dados.titulo();
 	        }

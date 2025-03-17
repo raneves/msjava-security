@@ -5,7 +5,11 @@ import org.springframework.stereotype.Service;
 
 import br.com.romulo.msjava_security.domain.topico.Status;
 import br.com.romulo.msjava_security.domain.topico.TopicoService;
+import br.com.romulo.msjava_security.domain.usuario.Usuario;
 import br.com.romulo.msjava_security.infra.exeption.RegraDeNegocioException;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
 
 import java.util.List;
 
@@ -13,10 +17,12 @@ import java.util.List;
 public class RespostaService {
     private final RespostaRepository repository;
     private final TopicoService topicoService;
+    private final RoleHierarchy roleHierarchy;
 
-    public RespostaService(RespostaRepository repository, TopicoService topicoService) {
+    public RespostaService(RespostaRepository repository, TopicoService topicoService, RoleHierarchy roleHierarchy) {
         this.repository = repository;
         this.topicoService = topicoService;
+        this.roleHierarchy = roleHierarchy;        
     }
 
     @Transactional
@@ -46,18 +52,7 @@ public class RespostaService {
     public List<Resposta> buscarRespostasTopico(Long id){
         return repository.findByTopicoId(id);
     }
-
-    @Transactional
-    public Resposta marcarComoSolucao(Long id) {
-        var resposta = buscarPeloId(id);
-
-        var topico = resposta.getTopico();
-        if(topico.getStatus() == Status.RESOLVIDO)
-            throw new RegraDeNegocioException("O tópico já foi solucionado! Você não pode marcar mais de uma resposta como solução.");
-
-        topico.alterarStatus(Status.RESOLVIDO);
-        return resposta.marcarComoSolucao();
-    }
+   
 
     @Transactional
     public void excluir(Long id) {
@@ -76,5 +71,33 @@ public class RespostaService {
     public Resposta buscarPeloId(Long id) {
         return repository.findById(id)
                 .orElseThrow(() -> new RegraDeNegocioException("Resposta não encontrada!"));
+    }
+    
+    @Transactional
+    public Resposta marcarComoSolucao(Long id, Usuario logado) {
+            var resposta = buscarPeloId(id);
+
+            var topico = resposta.getTopico();
+        
+            if(!usuarioTemPermissoes(logado, topico.getAutor()))            	
+                    throw new AccessDeniedException("Você não pode marcar essa resposta como solução!");
+        
+            if(topico.getStatus() == Status.RESOLVIDO)
+                    throw new RegraDeNegocioException("O tópico já foi solucionado! Você não pode marcar mais de uma resposta como solução.");
+
+            topico.alterarStatus(Status.RESOLVIDO);
+            return resposta.marcarComoSolucao();
+    }
+    
+    private boolean usuarioTemPermissoes(Usuario logado, Usuario autor) {
+        for(GrantedAuthority autoridade: logado.getAuthorities()){
+                var autoridadesAlcancaveis =  roleHierarchy.getReachableGrantedAuthorities(List.of(autoridade));
+
+                for(GrantedAuthority perfil: autoridadesAlcancaveis){
+                        if(perfil.getAuthority().equals("ROLE_INSTRUTOR") || logado.getId().equals(autor.getId()))
+                                return true;
+                }
+        }
+        return false;
     }
 }

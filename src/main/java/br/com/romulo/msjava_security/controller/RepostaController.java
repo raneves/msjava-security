@@ -17,6 +17,8 @@ import br.com.romulo.msjava_security.domain.resposta.DadosAtualizacaoResposta;
 import br.com.romulo.msjava_security.domain.resposta.DadosCadastroResposta;
 import br.com.romulo.msjava_security.domain.resposta.DadosListagemResposta;
 import br.com.romulo.msjava_security.domain.resposta.RespostaService;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import br.com.romulo.msjava_security.domain.usuario.Usuario;
 
 @RestController
 @RequestMapping("topicos/{idTopico}/respostas")
@@ -39,12 +41,18 @@ public class RepostaController {
         var resposta = service.atualizar(dados);
         return ResponseEntity.ok(new DadosListagemResposta(resposta));
     }
-
+    
     @PatchMapping("/{id}")
-    public ResponseEntity<DadosListagemResposta> marcarComoSolucao(@PathVariable Long id){
-        var resposta = service.marcarComoSolucao(id);
+    public ResponseEntity<DadosListagemResposta> marcarComoSolucao(@PathVariable Long id, @AuthenticationPrincipal Usuario logado){
+        var resposta = service.marcarComoSolucao(id, logado);
         return ResponseEntity.ok(new DadosListagemResposta(resposta));
     }
+
+//    @PatchMapping("/{id}")
+//    public ResponseEntity<DadosListagemResposta> marcarComoSolucao(@PathVariable Long id, AuthenticationPrincipal Usuario logado){
+//        var resposta = service.marcarComoSolucao(id);
+//        return ResponseEntity.ok(new DadosListagemResposta(resposta));
+//    }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> excluir(@PathVariable Long id){

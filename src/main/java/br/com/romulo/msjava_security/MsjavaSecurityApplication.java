@@ -13,6 +13,8 @@ public class MsjavaSecurityApplication {
 	    //senha cadastrada no banco eh: maria123, utilizamos o site https://bcrypt.online/ para criptografar
 	    //o login eh maria@email.com
 		
+		//usuario admin, joao senha joao123: $2y$10$6SJzkS0GDFMqcXSWmPc5LuDeXjIXB.gbbD0HGlVVh.Og1MH8HXxS2
+		
 		SpringApplication.run(MsjavaSecurityApplication.class, args);
 	}
 
