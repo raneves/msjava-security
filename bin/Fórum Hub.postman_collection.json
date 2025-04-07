@@ -1,0 +1,626 @@
+{
+	"info": {
+		"_postman_id": "7f8f0a7b-5d67-4111-84ff-b3af6cb968a3",
+		"name": "Fórum Hub",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "10758998"
+	},
+	"item": [
+		{
+			"name": "cursos",
+			"item": [
+				{
+					"name": "listagem",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/cursos",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"cursos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "listagem por categoria",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/cursos?categoria=IA",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"cursos"
+							],
+							"query": [
+								{
+									"key": "categoria",
+									"value": "IA"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "respostas",
+			"item": [
+				{
+					"name": "cadastro",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJGb3J1bSBIdWIiLCJzdWIiOiJpYXNtaW5hbHVyYUBnbWFpbC5jb20iLCJleHAiOjE3MzAxMzAyMzd9.S1Is_ZKEbwyt5uzzfYp0Vfqbt0lZkl3fsqJrRzvWN0w",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"mensagem\":\"Async-await é um conteúdo relacionado a concorrência e paralelismo utilizando várias threads.\",\r\n    \"autor\": \"iasmin\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/topicos/3/respostas",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"topicos",
+								"3",
+								"respostas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "edicao",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\":15,\r\n    \"mensagem\":\"Async-await é um conteúdo relacionado a concorrência e paralelismo.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/topicos/2/respostas",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"topicos",
+								"2",
+								"respostas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "marcar como solução",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/topicos/2/respostas",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"topicos",
+								"2",
+								"respostas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "exclusão",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/topicos/2/respostas",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"topicos",
+								"2",
+								"respostas"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "topicos",
+			"item": [
+				{
+					"name": "listagem geral",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/topicos",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"topicos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"email\": \"maria@email.com\",\r\n   \"senha\": \"maria123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/login",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login admin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"email\": \"joao@email.com\",\r\n   \"senha\": \"joao123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/login",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "atualizar-token",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"refreshToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJGb3J1bSBIdWIiLCJzdWIiOiIxIiwiZXhwIjoxNzQwNTk2MjA3fQ.5QlNQGVFqMQIdZmMrl0L84JmLHh_jmD3J8QebKe-iXw\"\r\n}  ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/atualizar-token",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"atualizar-token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "listagem detalhes",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/topicos/3",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"topicos",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "listagem sem solucao",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/topicos?sem-resposta=true",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"topicos"
+							],
+							"query": [
+								{
+									"key": "sem-resposta",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "listagem solucionados",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/topicos?solucionados=true",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"topicos"
+							],
+							"query": [
+								{
+									"key": "solucionados",
+									"value": "true"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "listagem programacao",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/topicos?categoria=programacao",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"topicos"
+							],
+							"query": [
+								{
+									"key": "categoria",
+									"value": "programacao"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "listagem programacao - curso 1",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/topicos/?categoria=programacao&curso=1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"topicos",
+								""
+							],
+							"query": [
+								{
+									"key": "categoria",
+									"value": "programacao"
+								},
+								{
+									"key": "curso",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "cadastro topicos",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJGb3J1bSBIdWIiLCJzdWIiOiJtYXJpYUBlbWFpbC5jb20iLCJleHAiOjE3NDA2MTEzOTd9.YUWpZsIWDhAcPg_3wdhf4H4jTKMQ8xS6Xw8PxOtFD00",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"titulo\": \"Como usar classes abstratas em Java?\",\r\n  \"mensagem\": \"Estou com dúvidas sobre como e quando usar classes abstratas no Java. Alguém pode me ajudar?\",\r\n  \"cursoId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/topicos",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"topicos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "cadastro topicos-respostas",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJGb3J1bSBIdWIiLCJzdWIiOiJtYXJpYUBlbWFpbC5jb20iLCJleHAiOjE3NDA2MTEzOTd9.YUWpZsIWDhAcPg_3wdhf4H4jTKMQ8xS6Xw8PxOtFD00",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"titulo\": \"Como usar classes abstratas em Java?\",\r\n  \"mensagem\": \"Estou com dúvidas sobre como e quando usar classes abstratas no Java. Alguém pode me ajudar?\",\r\n  \"cursoId\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/topicos/2/respostas",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"topicos",
+								"2",
+								"respostas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "adicionar-perfil",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJGb3J1bSBIdWIiLCJzdWIiOiJqb2FvQGVtYWlsLmNvbSIsImV4cCI6MTc0MjIzMTE3N30.0rIc43Z53E6W-rAccnJ2ljM498y3UBTTvjyJVcgnSDQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"perfilNome\": \"INSTRUTOR\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/adicionar-perfil/10",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"adicionar-perfil",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "registrar",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"romulo.neves@gmail.com\",\r\n  \"senha\": \"romuloan\",\r\n  \"nomeCompleto\": \"Romulo Almeida Neves\",\r\n  \"nomeUsuario\" : \"romulo.neves\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/registrar",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"registrar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "edição",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\":13,\r\n  \"titulo\": \"Como usar classes abstratas em Java?\",\r\n  \"mensagem\": \"Estou com dúvidas sobre como e quando usar classes abstratas no Java. \",\r\n  \"cursoId\": 4\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/topicos",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"topicos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "fechamento de um tópico",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJGb3J1bSBIdWIiLCJzdWIiOiJpYXNtaW5hbHVyYUBnbWFpbC5jb20iLCJleHAiOjE3MjkyODEwNDJ9.O41LMaOCMZoFIl3MyrdHahxGj8TRfVs0kVCESgAYhGQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/topicos/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"topicos",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "exclusão",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJGb3J1bSBIdWIiLCJzdWIiOiJpYXNtaW5hbHVyYUBnbWFpbC5jb20iLCJleHAiOjE3MjkyNzgwNjV9.Y8SQR2jwBS6Qx2UNRou_GoD4YVXF0zqjyRyeMU9dNdo",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/topicos/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"topicos",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
