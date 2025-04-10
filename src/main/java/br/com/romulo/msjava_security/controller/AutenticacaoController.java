@@ -51,7 +51,7 @@ public class AutenticacaoController {
         return ResponseEntity.ok(new DadosToken(tokenAcesso, refreshToken));
     }	
     
-    @PostMapping("/atualizar-token")
+    @PostMapping("/requisitar-token")
     public ResponseEntity<DadosToken> atualizarToken(@Valid @RequestBody DadosRefreshToken dados){
     	var refreshToken = dados.refreshToken();
         Long idUsuario = Long.valueOf(tokenService.verificarToken(refreshToken)); //obter o id usuario no subject, pq para o refresh token tem o id do usuario
